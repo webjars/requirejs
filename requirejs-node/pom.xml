@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.webjars</groupId>
+        <artifactId>requirejs-parent</artifactId>
+        <version>2.1.11-1-SNAPSHOT</version>
+    </parent>
+
+    <packaging>jar</packaging>
+    <artifactId>requirejs-node</artifactId>
+    <name>RequireJS Node Module</name>
+    <description>WebJar for RequireJS Node Module</description>
+
+    <properties>
+        <sourceUrl>https://github.com/jrburke/r.js/archive</sourceUrl>
+        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${upstreamVersion}</destDir>
+        <extractDir>${project.build.directory}/r.js-${upstreamVersion}</extractDir>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>download-js</id>
+                        <phase>process-resources</phase>
+                        <goals><goal>download-single</goal></goals>
+                        <configuration>
+                            <url>${sourceUrl}</url>
+                            <fromFile>${upstreamVersion}.zip</fromFile>
+                            <toFile>${project.build.directory}/requirejs.zip</toFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <echo message="unzip archive" />
+                                <unzip src="${project.build.directory}/requirejs.zip" dest="${project.build.directory}" />
+                                <echo message="moving resources" />
+                                <move file="${extractDir}/dist/r.js" todir="${destDir}" />
+
+                                <echo message="generating package.json" />
+                                <echo file="${destDir}/package.json">{
+    "name": "requirejs",
+    "description": "Node adapter for RequireJS, for loading AMD modules. Includes RequireJS optimizer",
+    "version": "${upstreamVersion}",
+    "homepage": "http://github.com/jrburke/r.js",
+    "author": "James Burke &lt;jrburke@gmail.com&gt; (http://github.com/jrburke)",
+    "licenses": [
+        {
+            "type": "BSD",
+            "url": "https://github.com/jrburke/r.js/blob/master/LICENSE"
+        },
+        {
+            "type": "MIT",
+            "url": "https://github.com/jrburke/r.js/blob/master/LICENSE"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jrburke/r.js.git"
+    },
+    "main": "./r.js",
+    "engines": {
+        "node": ">=0.4.0"
+    }
+}</echo>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
