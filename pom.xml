@@ -8,13 +8,18 @@
         <version>7</version>
     </parent>
 
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <groupId>org.webjars</groupId>
-    <artifactId>requirejs</artifactId>
-    <version>2.1.12-SNAPSHOT</version>
-    <name>requirejs</name>
-    <description>WebJar for RequireJS</description>
+    <artifactId>requirejs-parent</artifactId>
+    <version>2.1.11-1-SNAPSHOT</version>
+    <name>requirejs-parent</name>
+    <description>Parent WebJar for RequireJS</description>
     <url>http://webjars.org</url>
+
+    <modules>
+        <module>requirejs</module>
+        <module>requirejs-node</module>
+    </modules>
 
     <licenses>
         <license>
@@ -37,44 +42,20 @@
             <name>James Ward</name>
             <email>james@jamesward.org</email>
         </developer>
+        <developer>
+            <id>jamesroper</id>
+            <name>James Roper</name>
+            <email>james@jazzy.id.au</email>
+        </developer>
     </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <upstreamVersion>2.1.11</upstreamVersion>
-        <downloadUrl>http://requirejs.org/docs/release/${upstreamVersion}</downloadUrl>
-        <destinationDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${upstreamVersion}</destinationDir>
     </properties>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
-                <version>1.0-beta-4</version>
-                <executions>
-                    <execution>
-                        <id>download-min-js</id>
-                        <phase>process-resources</phase>
-                        <goals><goal>download-single</goal></goals>
-                        <configuration>
-                            <url>${downloadUrl}/minified</url>
-                            <fromFile>require.js</fromFile>
-                            <toFile>${destinationDir}/require.min.js</toFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>download-full-js</id>
-                        <phase>process-resources</phase>
-                        <goals><goal>download-single</goal></goals>
-                        <configuration>
-                            <url>${downloadUrl}/comments</url>
-                            <fromFile>require.js</fromFile>
-                            <toDir>${destinationDir}</toDir>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
