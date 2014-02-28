@@ -23,7 +23,12 @@
 
     <licenses>
         <license>
-            <name>The "New" BSD License or MIT License</name>
+            <name>New BSD</name>
+            <url>https://github.com/jrburke/requirejs/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>MIT</name>
             <url>https://github.com/jrburke/requirejs/blob/master/LICENSE</url>
             <distribution>repo</distribution>
         </license>
