@@ -15,8 +15,12 @@
 
     <properties>
         <sourceUrl>https://github.com/jrburke/r.js/archive</sourceUrl>
-        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${upstreamVersion}</destDir>
+        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
         <extractDir>${project.build.directory}/r.js-${upstreamVersion}</extractDir>
+        <requirejs>
+            {
+            }
+        </requirejs>
     </properties>
 
     <dependencies>
