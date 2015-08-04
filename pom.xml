@@ -56,7 +56,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <upstreamVersion>2.1.19</upstreamVersion>
+        <upstreamVersion>2.1.20</upstreamVersion>
     </properties>
 
     <build>
