@@ -14,7 +14,7 @@
     <description>WebJar for RequireJS</description>
 
     <properties>
-        <downloadUrl>http://requirejs.org/docs/release/${upstreamVersion}</downloadUrl>
+        <downloadUrl>http://requirejs.org/docs/release/${version.unsnapshot}</downloadUrl>
         <destinationDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destinationDir>
         <requirejs>
             {

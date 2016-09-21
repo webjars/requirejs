@@ -16,7 +16,7 @@
     <properties>
         <sourceUrl>https://github.com/jrburke/r.js/archive</sourceUrl>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
-        <extractDir>${project.build.directory}/r.js-${upstreamVersion}</extractDir>
+        <extractDir>${project.build.directory}/r.js-${version.unsnapshot}</extractDir>
         <requirejs>
             {
             }
@@ -39,7 +39,7 @@
                         <goals><goal>download-single</goal></goals>
                         <configuration>
                             <url>${sourceUrl}</url>
-                            <fromFile>${upstreamVersion}.zip</fromFile>
+                            <fromFile>${version.unsnapshot}.zip</fromFile>
                             <toFile>${project.build.directory}/requirejs.zip</toFile>
                         </configuration>
                     </execution>
@@ -64,7 +64,7 @@
                                 <echo file="${destDir}/package.json">{
     "name": "requirejs",
     "description": "Node adapter for RequireJS, for loading AMD modules. Includes RequireJS optimizer",
-    "version": "${upstreamVersion}",
+    "version": "${version.unsnapshot}",
     "homepage": "http://github.com/jrburke/r.js",
     "author": "James Burke &lt;jrburke@gmail.com&gt; (http://github.com/jrburke)",
     "licenses": [
